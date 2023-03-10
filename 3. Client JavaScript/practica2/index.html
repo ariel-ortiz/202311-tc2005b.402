@@ -9,13 +9,21 @@
     <script src="carta_secreta.js" defer></script>
   </head>
   <body class="w3-green w3-container">
+
     <h1>Carta Secreta</h1>
+
     <img id="laCarta" class="carta" src="cards/BACK.svg">
+
     <p>
-      Hay 52 cartas en la baraja.
+      Hay <span id="cantidad">52</span> cartas en la baraja.
     </p>
-    <p>
+
+    <p id="botonPrincipal">
       <button onclick="descubreCarta();" class="w3-btn w3-purple w3-round-xlarge">Púshale</button>
+    </p>
+
+    <p id="botonReiniciar" style="display: none;">
+      <a href="" class="w3-btn w3-purple w3-round-xlarge">Reiniciar</a>
     </p>
   </body>
 </html>

@@ -24,8 +24,16 @@ function shuffle(a) {
 }
 
 /* global laCarta */
+/* global cantidad */
+/* global botonPrincipal */
+/* global botonReiniciar */
 
 function descubreCarta() {
   let carta = cartas.pop();
+  cantidad.innerText = cartas.length.toString();
   laCarta.src = 'cards/' + carta;
+  if (cartas.length == 0) {
+    botonPrincipal.style.display = 'none';
+    botonReiniciar.style.display = 'block';
+  }
 }
