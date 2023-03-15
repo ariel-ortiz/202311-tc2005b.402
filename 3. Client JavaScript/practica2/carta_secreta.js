@@ -30,7 +30,7 @@ function shuffle(a) {
 
 function descubreCarta() {
   let carta = cartas.pop();
-  cantidad.innerText = cartas.length.toString();
+  cantidad.innerText = cartas.length.toString() + ' \u{1F610}';
   laCarta.src = 'cards/' + carta;
   if (cartas.length == 0) {
     botonPrincipal.style.display = 'none';
