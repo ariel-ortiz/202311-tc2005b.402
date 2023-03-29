@@ -23,6 +23,25 @@ app.get('/prueba', (req, res) => {
   res.send('Esta es una prueba en formato texto');
 });
 
+app.get('/gcd/:num1/:num2', (req, res) => {
+  let x = parseInt(req.params.num1);
+  let y = parseInt(req.params.num2);
+  if (isNaN(x) || isNaN(y)) {
+    res.json({
+      status: 'error',
+      message: 'al menos uno de los valores de entrada no es un número'
+    });
+  } else {
+    res.json({status: 'ok', result: gcd(x, y)});
+  }
+});
+
+function gcd(a, b) {
+  while (b !== 0) {
+    [a, b] = [b, a % b];
+  }
+  return a;
+}
 // custom 404 page
 app.use((req, res) => {
   res.type('text/plain');
