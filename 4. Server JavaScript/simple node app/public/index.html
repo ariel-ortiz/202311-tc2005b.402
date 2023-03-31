@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
-    <title>Principal</title>
+    <meta charset="utf-8">
+    <title>GCD</title>
+    <script src="/javascript/codigo.js" defer></script>
   </head>
   <body>
-    <h1>Principal</h1>
-    <p>
-      Esta es la página principal.
-    </p>
+    <h1>GCD</h1>
+
+    <div id="entradas">
+
+      <p>
+        <label for="num1">Primer número:</label>
+        <input id="num1" placeholder="ingresa número">
+      </p>
+
+      <p>
+        <label for="num2">Segundo número:</label>
+        <input id="num2" placeholder="ingresa número">
+      </p>
+
+      <p>
+        <button onclick="calcularGCD();">Calcular GCD</button>
+      </p>
+
+    </div>
+
+    <div id="salida" style="display: none">
+      <p id="textoSalida"></p>
+      <a href="">Reiniciar</a>
+    </div>
+
   </body>
 </html>
