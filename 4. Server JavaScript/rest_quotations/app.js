@@ -33,7 +33,7 @@ app.get('/quotations', (req, res) => {
         result.push({
            id: row.id,
            author: row.author,
-           prelude: row.excerpt.split(' ').slice(0, 3).join(' ') + '...',
+           prelude: row.excerpt?.split(' ').slice(0, 3).join(' ') + '...',
            url: `http://${ipAddr}:${port}/quotations/${row.id}`
         });
       }
@@ -61,6 +61,65 @@ app.get('/quotations/:id', (req, res) => {
         }
       }
     });
+});
+
+app.post('/quotations', (req, res) => {
+  let { author, excerpt } = req.body;
+  db.query('INSERT INTO quotations (author, excerpt) VALUES (?, ?)',
+  [author, excerpt],
+  (err, result) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.type('text')
+        .status(201)
+        .send(`Resource created with ID = ${result.insertId}.\n`);
+    }
+  });
+});
+
+app.delete('/quotations/:id', (req, res) => {
+  let id = req.params.id;
+  db.query('DELETE FROM quotations WHERE id = ?',
+    [id],
+    (err, rows) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.type('text').send(`Resource with ID = ${id} deleted.\n`);
+      }
+    });
+});
+
+app.delete('/quotations', (req, res) => {
+  db.query('DELETE FROM quotations',
+    (err, rows) => {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.type('text').send(`All resources deleted.\n`);
+      }
+    });
+});
+
+app.put('/quotations/:id', (req, res) => {
+  let id = req.params.id;
+  let { author, excerpt } = req.body;
+  db.query('UPDATE quotations SET author=?, excerpt=? WHERE id=?',
+  [author, excerpt, id],
+  (err, result) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      if (result.affectedRows === 1) {
+        res.type('text').send(
+          `Resource with ID = ${id} updated.\n`);
+      } else {
+        res.type('text').status(400).send(
+          `Unable to update resource with ID = ${id}.\n`);
+      }
+    }
+  });
 });
 
 // custom 404 page
